@@ -1,0 +1,194 @@
+<html>
+
+<head>
+
+    <style>
+        body {
+            background: skyblue;
+        }
+
+        .name_container {
+            display: flex;
+            margin: 2px !important;
+        }
+
+        form {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            
+            /* width: 800px; */
+        }
+
+        #form_container {
+            background: white;
+            display: flex;
+            flex-direction: column;
+
+            /* justify-content: center; */
+            /* align-items: center; */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #form_container div {
+            margin: 20px 40px 20px 40px;
+        }
+
+        .name {
+            height: 3vh;
+        }
+
+        button {
+            margin-left: 5px;
+            margin-bottom: 30px;
+            width: 100px;
+            height: 3vh;
+            background: skyblue;
+        }
+
+        .popup {
+            display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); 
+        }
+
+        .popup_content {
+            background-color: #fff;
+      width: 80%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      margin-top: 15%;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+    </style>
+
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+
+       
+
+        
+
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+    });
+});
+
+function openPopup() {
+            // event.preventDefault()
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const using = findChecked(document.getElementsByName('radio_1'));
+            const friends = findChecked(document.getElementsByName('radio_2'));
+            const satisfied = findChecked(document.getElementsByName('radio_3'));
+            const textarea = document.getElementById("textarea").value;
+
+            document.getElementById('selected_name').innerHTML = 'Selected name is ' + name;
+            document.getElementById('selected_email').innerHTML = 'Selected email is ' + email;
+            document.getElementById('selected_using').innerHTML = 'Is this firs time using our products: ' + using;
+            document.getElementById('selected_friends').innerHTML = 'Suggest our products to friends: ' + friends;
+            document.getElementById('selected_satisfied').innerHTML = 'How satisifed you are with our products: ' + satisfied;
+            document.getElementById('selected_suggestions').innerHTML = 'Suggestion to us: ' + textarea;
+
+            document.getElementById("popup").style.display = 'block';
+        }
+        function findChecked(elements) {
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].checked) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        function close_popup() {
+            document.getElementById("popup").style.display = 'none';
+            document.getElementById('myForm').reset();
+        }
+        
+
+    </script>
+
+</head>
+
+<body>
+    <form id="myForm">
+        <h1> Customer Survey Form</h1>
+        <div id="form_container">
+
+                <div class="name_container">
+                    <div>
+                        Name: <br /> <input class="name" id="name" required/>
+                    </div>
+                    <div>
+                        Email: <br /> <input class="name" id="email" required/>
+                    </div>
+                </div>
+
+                <div>
+                Is this first time You are using our products & services ?<br>
+
+                <input type="radio" id="html" name="radio_1" value="HTML" required>
+                <label for="yes">Yes</label>
+                <input type="radio" id="css" name="radio_1" value="CSS" required>
+                <label for="no">No</label><br>
+
+            </div>
+
+            <div>
+                Would you suggestion to your friends and colleague ?<br>
+
+                <input type="radio" id="html" name="radio_2" value="HTML" required>
+                <label for="yes">Yes</label>
+                <input type="radio" id="css" name="radio_2" value="CSS" required>
+                <label for="no">No</label>
+            </div>
+            <div>
+                How satisfied are you with our company overall ?<br>
+
+                <input type="radio" id="html" name="radio_3" value="HTML" required>
+                <label for="satisfied">Satisfied</label>
+                <input type="radio" id="css" name="radio_3" value="CSS" required>
+                <label for="Undecided">Undecided</label>
+                <input type="radio" id="css" name="radio_3" value="CSS" required>
+                <label for="Unsatisfied">Unsatisfied</label>
+            </div>
+
+            <div>
+                Do you have suggestion to improve our service ?<br>
+                <textarea rows="4" cols="58" id="textarea"></textarea>
+            </div>
+
+                
+            <div>
+                <button type="submit" onClick="openPopup()">SUBMIT</button>
+                <button onclick="reset()">RESET</button>
+            </div>
+
+    </form>
+
+    <div class="popup" id="popup">
+        <div class="popup_content">
+            <p id="selected_name"></p>
+        <p id="selected_email"></p>
+        <p id="selected_using"></p>
+        <p id="selected_friends"></p>
+        <p id="selected_satisfied"></p>
+        <p id="selected_suggestions"></p>
+        <button onclick="close_popup();">Close</button>
+        </div>
+    </div> 
+</body>
+
+</html>
